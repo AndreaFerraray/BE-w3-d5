@@ -1,11 +1,9 @@
 package entities.user;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -14,6 +12,9 @@ import java.util.UUID;
 public class Utente {
     @Id
     @GeneratedValue
+
+
+
     private UUID numeroTessera;
     private String firstName;
     private String lastName;

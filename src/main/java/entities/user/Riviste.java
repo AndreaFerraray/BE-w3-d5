@@ -1,25 +1,38 @@
-package entities.catalogo;
+package entities.user;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="Book")
-public class Book {
+@Table(name="Riviste ")
+public class Riviste {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     private UUID id;
+
+
+
+
     private String titolo;
     private long annoPubblicazione;
 
     private long numeroPagine;
-    private String autore;
-    private String genere;
+
+private Date periodicità;
+
+
+
+    public Date getPeriodicità() {
+        return periodicità;
+    }
+
+    public void setPeriodicità(Date periodicità) {
+        this.periodicità = periodicità;
+    }
 
     public UUID getId() {
         return id;
@@ -48,30 +61,12 @@ public class Book {
     public void setNumeroPagine(long numeroPagine) {
         this.numeroPagine = numeroPagine;
     }
-
-    public String getAutore() {
-        return autore;
-    }
-
-    public void setAutore(String autore) {
-        this.autore = autore;
-    }
-
-    public String getGenere() {
-        return genere;
-    }
-
-    public void setGenere(String genere) {
-        this.genere = genere;
-    }
-
-    public Book(UUID id, String titolo, long annoPubblicazione, long numeroPagine, String autore, String genere) {
+    public Riviste(UUID id, String titolo, long annoPubblicazione, long numeroPagine, Date periodicità) {
         this.id = id;
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
         this.numeroPagine = numeroPagine;
-        this.autore = autore;
-        this.genere = genere;
+        this.periodicità = periodicità;
     }
-
 }
+
