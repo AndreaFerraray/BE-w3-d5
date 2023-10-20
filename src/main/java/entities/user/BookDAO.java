@@ -2,15 +2,28 @@ package entities.user;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
-
+import java.util.UUID;
 
 
 public class BookDAO {
-    private EntityManager em;
+    private static EntityManager em;
 
     public BookDAO(EntityManager em) {
         this.em = em;
+    }
+
+    public static Book findAndDeleteBookById(UUID uuidDaCercato) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+        Book bookToDelete = em.find(Book.class, uuidDaCercato);
+        if (bookToDelete != null) {
+            em.remove(bookToDelete);
+    }
+        transaction.commit();
+
+        return bookToDelete;
+
     }
 
 
@@ -22,6 +35,9 @@ public class BookDAO {
         System.out.println("Salvato correttamente nuovo libro");
     }
 
+    public static Book findBookById(UUID bookId) {
+        return em.find(Book.class, bookId);
+    }
 
 
 
@@ -33,23 +49,8 @@ public class BookDAO {
     }
 
 
-    public Book findById(long id){
-        return em.find(Book.class,id);
-    }
-    public Book findByIdAndDelete(long id) {
-        Book found = em.find(Book.class, id);
-        if (found != null) {
-            EntityTransaction transaction = em.getTransaction();
-            transaction.begin();
-            em.remove(found);
-            transaction.commit();
 
-        } else {
-            System.out.println("lo studente con l'id" + id + "non è stato tovato");
-        }
 
-        return found;
-    }
 }
 
 

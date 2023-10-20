@@ -25,8 +25,21 @@ public class Application {
             Book book = new Book(UUID.randomUUID(), "Harry", 2023, 300, "gino", "find");
 
             sd.save(book);
-            Book bookFromDB=sd.findById(1);
-            System.out.println(bookFromDB);
+            UUID uuidDaCercare = UUID.fromString("3cbd735c-3463-4677-96b0-ad40cbd48f6d");
+            Book libroTrovato = BookDAO.findBookById(  uuidDaCercare);
+            System.out.println("il libro è" + libroTrovato);
+
+
+
+            UUID uuidDaCercato = UUID.fromString("3cbd735c-3463-4677-96b0-ad40cbd48f6d");
+            Book libroCancellato = BookDAO.findAndDeleteBookById(uuidDaCercato);
+
+            if (libroCancellato != null) {
+                System.out.println("Libro cancellato: " + libroCancellato.getTitolo());
+            } else {
+                System.out.println("Nessun libro trovato con quell'UUID.");
+            }
+
 
         }
         catch(Exception ex){
